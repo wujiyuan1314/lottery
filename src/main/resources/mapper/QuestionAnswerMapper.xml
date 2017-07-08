@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="main.java.dao.QuestionAnswerMapper" >
+  <resultMap id="BaseResultMap" type="main.java.entity.QuestionAnswer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="questionid" property="questionid" jdbcType="INTEGER" />
+    <result column="answerdetail" property="answerdetail" jdbcType="VARCHAR" />
+    <result column="isright" property="isright" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, questionid, answerdetail, isright, addtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from question_answer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question_answer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="main.java.entity.QuestionAnswer" >
+    insert into question_answer (id, questionid, answerdetail, 
+      isright, addtime)
+    values (#{id,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, #{answerdetail,jdbcType=VARCHAR}, 
+      #{isright,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="main.java.entity.QuestionAnswer" >
+    insert into question_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questionid != null" >
+        questionid,
+      </if>
+      <if test="answerdetail != null" >
+        answerdetail,
+      </if>
+      <if test="isright != null" >
+        isright,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="answerdetail != null" >
+        #{answerdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isright != null" >
+        #{isright,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="main.java.entity.QuestionAnswer" >
+    update question_answer
+    <set >
+      <if test="questionid != null" >
+        questionid = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="answerdetail != null" >
+        answerdetail = #{answerdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isright != null" >
+        isright = #{isright,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="main.java.entity.QuestionAnswer" >
+    update question_answer
+    set questionid = #{questionid,jdbcType=INTEGER},
+      answerdetail = #{answerdetail,jdbcType=VARCHAR},
+      isright = #{isright,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertBookBatch" parameterType="java.util.List">
+		  insert into question_answer (questionid,answerdetail,isright,addtime)
+		        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.questionid,jdbcType=VARCHAR},
+             #{item.answerdetail,jdbcType=VARCHAR},
+             #{item.isright,jdbcType=VARCHAR},
+             #{item.addtime,jdbcType=TIMESTAMP}
+             )
+        </foreach>
+  </insert>
+</mapper>
