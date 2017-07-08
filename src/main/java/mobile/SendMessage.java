@@ -1,23 +1,28 @@
 package main.java.mobile;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.netease.checksum.CheckSumBuilder;
+import main.java.util.JsonUtil;
 
 /**
  * 发送验证码
- * @author liuxuanlin
+ * @author wujiyuan
  *
  */
+@SuppressWarnings("deprecation")
 public class SendMessage {
     //发送验证码的请求路径URL
     private static final String
@@ -27,28 +32,30 @@ public class SendMessage {
             APP_KEY="fd460d34e786e7754e505bc4fab0f027";
     //网易云信分配的密钥，请替换你在管理后台应用下申请的appSecret
     private static final String APP_SECRET="dffdf7757248";
-    //随机数
-    private static final String NONCE="123456";
     //短信模板ID
-    private static final String TEMPLATEID="3057527";
-    //手机号
-    private static final String MOBILE="13888888888";
+    //private static final String TEMPLATEID="3057527";
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="6";
-
-    public static void main(String[] args) throws Exception {
-
-        DefaultHttpClient httpClient = new DefaultHttpClient();
+    
+    /**
+     * 
+     * @param mobile 手机号
+     * @param nonce 随机数
+     * @param TEMPLATEID 短信模板ID
+     */
+    @SuppressWarnings("resource")
+	public String sendMsg(String mobile,String nonce,String TEMPLATEID){
+    	String json="{success:0,msg:'发送失败'}";
+		DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(SERVER_URL);
         String curTime = String.valueOf((new Date()).getTime() / 1000L);
         /*
          * 参考计算CheckSum的java代码，在上述文档的参数列表中，有CheckSum的计算文档示例
          */
-        String checkSum = CheckSumBuilder.getCheckSum(APP_SECRET, NONCE, curTime);
-
+        String checkSum = CheckSumBuilder.getCheckSum(APP_SECRET, nonce, curTime);
         // 设置请求的header
         httpPost.addHeader("AppKey", APP_KEY);
-        httpPost.addHeader("Nonce", NONCE);
+        httpPost.addHeader("Nonce", nonce);
         httpPost.addHeader("CurTime", curTime);
         httpPost.addHeader("CheckSum", checkSum);
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -61,19 +68,43 @@ public class SendMessage {
          * 3.params是根据你模板里面有几个参数，那里面的参数也是jsonArray格式
          */
         nvps.add(new BasicNameValuePair("templateid", TEMPLATEID));
-        nvps.add(new BasicNameValuePair("mobile", MOBILE));
+        nvps.add(new BasicNameValuePair("mobile", mobile));
         nvps.add(new BasicNameValuePair("codeLen", CODELEN));
 
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+        try {
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+			// 执行请求
+	        HttpResponse response = httpClient.execute(httpPost);
+	        //System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+	        String result =EntityUtils.toString(response.getEntity(), "utf-8");
+	        Map<String, Object> resultmap=JsonUtil.getMap4Json(result);
+	        String code=(String)resultmap.get("code");
+	        String msg=(String)resultmap.get("msg");
+	        if(code.equals("0")){
+	        	json="{success:1,msg:'发送成功'}";
+	        }else{
+	        	json="{success:0,msg:'"+msg+"'}";
+	        }
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-        // 执行请求
-        HttpResponse response = httpClient.execute(httpPost);
         /*
          * 1.打印执行结果，打印结果一般会200、315、403、404、413、414、500
          * 2.具体的code有问题的可以参考官网的Code状态表
          */
-        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+       return json;
 
     }
-
+    public static void main(String args[]){
+    	SendMessage s=new SendMessage();
+    	System.out.println(s.sendMsg("18640214798", "123456", "3057527"));
+    }
 }
