@@ -43,4 +43,10 @@ public interface QuestionService {
 	 * @return
 	 */
 	Question getQuestionByID(int id);
+	/**
+	 * 随机查询10条数据
+	 * @param id
+	 * @return
+	 */
+	List<Question> SelectRandTen();
 }

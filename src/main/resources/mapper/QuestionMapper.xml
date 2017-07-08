@@ -83,19 +83,7 @@
   <select id="SelectRandTen" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
-  	from question
-  	<where>
-  		<if test="question.questionTitle != null and !&quot;&quot;.equals(question.questionTitle.trim())">
-  			and question_title = #{bookInfo.questionTitle}
-  		</if>
-  		<if test="question.type != null and !&quot;&quot;.equals(question.type.trim())">
-  			and type = #{bookInfo.type}
-  		</if>
-  		<if test="question.addtime != null and !&quot;&quot;.equals(question.addtime.trim())">
-  			and addtime = #{bookInfo.addtime}
-  		</if>
-  	</where>order by rand() limit 10
-  	
+  	from question order by rand() limit 10	
   </select>
   
   <insert id="insertQuestionBatch" parameterType="java.util.List">

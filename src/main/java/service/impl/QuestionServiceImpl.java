@@ -82,5 +82,11 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<Question> SelectRandTen() {
+		// TODO Auto-generated method stub
+		return questionMapper.SelectRandTen();
+	}
+
 
 }

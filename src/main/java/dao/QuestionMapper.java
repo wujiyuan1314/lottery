@@ -19,7 +19,7 @@ public interface QuestionMapper {
 
     int updateByPrimaryKey(Question question);
     //随机查询10条
-    List<Question> SelectRandTen(@Param("question") Question question);
+    List<Question> SelectRandTen();
     //批量插入问题
     
   	void insertQuestionBatch(List<Question> list);
