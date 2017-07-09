@@ -5,7 +5,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		            classpath:resources/spring.xml
+		            classpath:main/resources/spring.xml
 		            <!-- classpath:spring-shiro.xml -->
 		</param-value>
 	</context-param>
@@ -19,7 +19,7 @@
             Mybites -> spring -> springMvc -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:resources/spring-mvc.xml</param-value>
+            <param-value>classpath:main/resources/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>

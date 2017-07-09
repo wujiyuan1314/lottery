@@ -46,7 +46,7 @@
      <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
           <property name="basenames">
              <list>
-                 <value>classpath:resource/ValidationMessages</value>
+                 <value>classpath:main/resources/ValidationMessages</value>
              </list>
         </property>
          <property name="useCodeAsDefaultMessage" value="true" />

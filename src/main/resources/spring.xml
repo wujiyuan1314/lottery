@@ -22,7 +22,7 @@
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
-				<value>classpath:resources/jdbc.properties</value>
+				<value>classpath:main/resources/jdbc.properties</value>
 			</list>
 		</property>
 	</bean>
