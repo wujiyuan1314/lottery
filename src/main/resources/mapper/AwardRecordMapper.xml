@@ -90,4 +90,36 @@
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <!-- 一下为自定义方法 -->
+  <select id="listAwardRecord" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from award_record
+  	<where>
+  		<if test="awardRecord.mobile != null and !&quot;&quot;.equals(awardRecord.mobile.trim())">
+  			and mobile = #{awardRecord.mobile}
+  		</if>
+  		<if test="awardRecord.awareid != null and !&quot;&quot;.equals(awardRecord.awareid.trim())">
+  			and awareid = #{awardRecord.awareid}
+  		</if>
+  		<if test="awardRecord.state != null and !&quot;&quot;.equals(awardRecord.state.trim())">
+  			and state = #{awardRecord.state}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countAwardRecord" resultType="int" parameterType="main.java.entity.AwardRecord">
+  	select count(*) from award_record
+  	<where>
+  		<if test="awardRecord.mobile != null and !&quot;&quot;.equals(awardRecord.mobile.trim())">
+  			and mobile = #{awardRecord.mobile}
+  		</if>
+  		<if test="awardRecord.awareid != null and !&quot;&quot;.equals(awardRecord.awareid.trim())">
+  			and awareid = #{awardRecord.awareid}
+  		</if>
+  		<if test="awardRecord.state != null and !&quot;&quot;.equals(awardRecord.state.trim())">
+  			and state = #{awardRecord.state}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  </select>
 </mapper>

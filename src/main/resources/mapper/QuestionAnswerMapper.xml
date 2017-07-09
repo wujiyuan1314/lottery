@@ -90,7 +90,17 @@
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
+    <!-- 一下为自定义方法 -->
+  <select id="selectByQuestionId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select
+  	<include refid="Base_Column_List" />
+  	from question
+  	<where>
+  		<if test="questionanswer.questionid != null and !&quot;&quot;.equals(questionanswer.questionid.trim())">
+  			and questionid = #{questionanswer.questionid}
+  		</if>
+  	</where>
+  </select>
   <insert id="insertBookBatch" parameterType="java.util.List">
 		  insert into question_answer (questionid,answerdetail,isright,addtime)
 		        values

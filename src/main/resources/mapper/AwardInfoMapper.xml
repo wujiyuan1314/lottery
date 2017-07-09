@@ -103,4 +103,42 @@
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <!-- 一下为自定义方法 -->
+  <select id="listAwardInfo" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from award_info
+  	<where>
+  		<if test="awardInfo.awardName != null and !&quot;&quot;.equals(awardInfo.awardName.trim())">
+  			and award_name = #{awardInfo.awardName}
+  		</if>
+  		<if test="awardInfo.awardGrade != null and !&quot;&quot;.equals(awardInfo.awardGrade.trim())">
+  			and award_grade = #{awardInfo.awardGrade}
+  		</if>
+  		<if test="awardInfo.awardNum != null and !&quot;&quot;.equals(awardInfo.awardNum.trim())">
+  			and award_num = #{awardInfo.awardNum}
+  		</if>
+  		<if test="awardInfo.probability != null and !&quot;&quot;.equals(awardInfo.probability.trim())">
+  			and probability = #{awardInfo.probability}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="countAwardInfo" resultType="int" parameterType="main.java.entity.AwardInfo">
+  	select count(*) from award_info
+  	<where>
+  		<if test="awardInfo.awardName != null and !&quot;&quot;.equals(awardInfo.awardName.trim())">
+  			and award_name = #{awardInfo.awardName}
+  		</if>
+  		<if test="awardInfo.awardGrade != null and !&quot;&quot;.equals(awardInfo.awardGrade.trim())">
+  			and award_grade = #{awardInfo.awardGrade}
+  		</if>
+  		<if test="awardInfo.awardNum != null and !&quot;&quot;.equals(awardInfo.awardNum.trim())">
+  			and award_num = #{awardInfo.awardNum}
+  		</if>
+  		<if test="awardInfo.probability != null and !&quot;&quot;.equals(awardInfo.probability.trim())">
+  			and probability = #{awardInfo.probability}
+  		</if>
+  	</where>
+  </select>
 </mapper>

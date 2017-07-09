@@ -3,11 +3,17 @@ package main.java.service;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import main.java.entity.Question;
+import main.java.util.Page;
 
 public interface QuestionService {
+	/**
+	 * 根据输入信息条件查询问题列表，并分页显示
+	 * @param bookInfo
+	 * @param page
+	 * @return
+	 */
+	List<Question> listQuestion(Question bookInfo, Page page);
 	
 	/**
 	 * 批量导入问题信息

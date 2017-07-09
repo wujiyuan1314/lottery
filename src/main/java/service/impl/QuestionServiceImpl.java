@@ -9,19 +9,29 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import main.java.dao.QuestionMapper;
 import main.java.entity.Question;
 import main.java.exception.ExcelException;
 import main.java.service.QuestionService;
 import main.java.util.DateUtil;
 import main.java.util.JxlExcelUtil;
+import main.java.util.Page;
 
 
 
 
 public class QuestionServiceImpl implements QuestionService {
+	@Autowired
 	QuestionMapper questionMapper;
-
+	@Override
+	public List<Question> listQuestion(Question question, Page page){
+		int totalNumber = questionMapper.countQuestion(question);
+		page.setTotalNumber(totalNumber);
+		List<Question> questions = questionMapper.listQuestion(question, page);
+		return questions;
+	}
 	@Override
 	public void uploadQuestion(File file) {
 		// TODO Auto-generated method stub

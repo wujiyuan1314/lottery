@@ -79,7 +79,58 @@
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <!-- 一下为自定义方法 -->
+     <!-- 一下为自定义方法 -->
+  <select id="listQuestion" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from question
+  	<where>
+  		<if test="question.questionTitle != null and !&quot;&quot;.equals(question.questionTitle.trim())">
+  			and question_title = #{question.questionTitle}
+  		</if>
+  		<if test="question.type != null and !&quot;&quot;.equals(question.type.trim())">
+  			and type = #{question.type}
+  		</if>
+  		<if test="question.addtime != null and !&quot;&quot;.equals(question.addtime.trim())">
+  			and addtime = #{question.addtime}
+  		</if>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	
+  </select>
+  
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from question
+  	<where>
+  		<if test="question.questionTitle != null and !&quot;&quot;.equals(question.questionTitle.trim())">
+  			and question_title = #{question.questionTitle}
+  		</if>
+  		<if test="question.type != null and !&quot;&quot;.equals(question.type.trim())">
+  			and type = #{question.type}
+  		</if>
+  		<if test="question.addtime != null and !&quot;&quot;.equals(question.addtime.trim())">
+  			and addtime = #{question.addtime}
+  		</if>
+  	</where>
+  	
+  </select>
+  
+  <select id="countQuestion" resultType="int" parameterType="main.java.entity.Question">
+  	select count(*) from question
+  	<where>
+  		<if test="question.questionTitle != null and !&quot;&quot;.equals(question.questionTitle.trim())">
+  			and question_title = #{question.questionTitle}
+  		</if>
+  		<if test="question.type != null and !&quot;&quot;.equals(question.type.trim())">
+  			and type = #{question.type}
+  		</if>
+  		<if test="question.addtime != null and !&quot;&quot;.equals(question.addtime.trim())">
+  			and addtime = #{question.addtime}
+  		</if>
+  	</where>
+  </select>
+  <!-- 随机查询10条数据 -->
   <select id="SelectRandTen" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />

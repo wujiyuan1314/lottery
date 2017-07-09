@@ -16,6 +16,8 @@ public interface QuestionAnswerMapper {
     int updateByPrimaryKeySelective(QuestionAnswer questionanswer);
 
     int updateByPrimaryKey(QuestionAnswer questionanswer);
-  //批量插入问题
+    //按问题ID查询该问题答案
+    List<QuestionAnswer> selectByQuestionId(Integer questionid);
+    //批量插入问题
   	void insertQuestionAnswerBatch(List<QuestionAnswer> list);
 }

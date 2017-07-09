@@ -352,7 +352,7 @@ public class DateUtil{
 	  	  c.setTime(date); 
 	  	  int day=c.get(Calendar.DATE); 
 	  	  c.set(Calendar.DATE,day-1); 
-	  	  String dayBefore=new SimpleDateFormat("yyyyMMdd").format(c.getTime()); 
+	  	  String dayBefore=simpleDateFormat.format(c.getTime()); 
 	  	  return dayBefore;
 	}
 

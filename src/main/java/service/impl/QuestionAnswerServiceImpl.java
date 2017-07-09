@@ -83,5 +83,11 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
 		return questionanswerMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<QuestionAnswer> selectByQuestionId(int questionid) {
+		// TODO Auto-generated method stub
+		return questionanswerMapper.selectByQuestionId(questionid);
+	}
+
 
 }
