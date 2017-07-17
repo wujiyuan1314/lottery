@@ -3,6 +3,7 @@ package main.java.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import main.java.dao.AwardRecordMapper;
 import main.java.dao.AwardRecordMapper;
@@ -10,7 +11,7 @@ import main.java.entity.AwardRecord;
 import main.java.entity.AwardRecord;
 import main.java.service.AwardRecordService;
 import main.java.util.Page;
-
+@Service
 public class AwardRecordServiceImpl implements AwardRecordService {
 	@Autowired
 	AwardRecordMapper awardRecordMapper;

@@ -12,9 +12,27 @@ import java.util.UUID;
  *
  */
 public class Function {
-//得到32位序列
-public static String getUUID(){
-	String uuid=Function.ClearTrim(UUID.randomUUID()).replaceAll("-", "");
+/** 
+ * 序号生成计数器 
+ */  
+public static long NumCount = 0;  
+/** 
+ * 生成序号数量最大值 
+ */  
+public static int maxPerMSECSize=1000; 
+public static String getTitleJsArray(String value,String jsArray[][]){
+	for(int i=0;i<jsArray.length;i++){
+		if(value.equals(jsArray[i][0])){
+			value=jsArray[i][1];
+			break;
+		}
+	}
+	return value;
+}
+//得到id
+public static int getUUID(){
+	String currdate=DateUtil.getCurrentDateTimeKeyStr3();
+	int uuid=Integer.parseInt(currdate);
 	return uuid;
 }
 //清除字符串两边的空格

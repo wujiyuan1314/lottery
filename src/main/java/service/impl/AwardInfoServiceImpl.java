@@ -3,11 +3,12 @@ package main.java.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import main.java.dao.AwardInfoMapper;
 import main.java.entity.AwardInfo;
 import main.java.service.AwardInfoService;
-
+@Service
 public class AwardInfoServiceImpl implements AwardInfoService {
 	@Autowired
 	AwardInfoMapper awardInfoMapper;
@@ -43,11 +44,11 @@ public class AwardInfoServiceImpl implements AwardInfoService {
 		}
 
 	}
-
 	@Override
 	public AwardInfo getAwardInfoByID(int id) {
 		// TODO Auto-generated method stub
-		return awardInfoMapper.selectByPrimaryKey(id);
+		AwardInfo awardInfo=awardInfoMapper.selectByPrimaryKey(id);
+		return awardInfo;
 	}
 
 }

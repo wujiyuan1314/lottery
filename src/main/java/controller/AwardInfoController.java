@@ -1,6 +1,12 @@
 package main.java.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import main.java.entity.AwardInfo;
 import main.java.service.AwardInfoService;
+import main.java.util.DateUtil;
+import main.java.util.Function;
 
 @Controller
 @RequestMapping("/awardInfo")
@@ -24,13 +32,17 @@ public class AwardInfoController {
 	AwardInfoService awardInfoService;
 
 	@RequestMapping(value="/awardInfos")
-	public String listAwardInfo(Model model, @ModelAttribute AwardInfo awardInfo) {
+	public String listAwardInfo(Model model, @ModelAttribute AwardInfo awardInfo, HttpServletRequest request) {
 		List<AwardInfo> awardInfos = awardInfoService.listAwardInfo(awardInfo);
+		String jsArray[][]={{"1","一等奖"},{"2","二等奖"},{"3","三等奖"}};
+		for(AwardInfo award:awardInfos){
+			award.setAwardGrade(Function.getTitleJsArray(award.getAwardGrade(), jsArray));
+		}
 		model.addAttribute("awardInfos",awardInfos);
-		return "awardInfo/awardInfo_list";
+		return "manage/award/award_list";
 	}
     /**
-	 * 跳转奖品信息添加界面
+	 * 跳转奖品添加界面
 	 * @param model
 	 * @return
 	 */
@@ -40,32 +52,46 @@ public class AwardInfoController {
 		return "awardInfo/awardInfo_add";
 	}
    /**
-    * 添加奖品信息
+    * 添加奖品
     * @param awardInfo
     * @param br
     * @return
     */
     @RequestMapping(value="/awardInfoadd",method=RequestMethod.POST)
-	public String addAwardInfo(@Validated AwardInfo awardInfo,BindingResult br){
-    	if(br.hasErrors()){
-    		return "awardInfo/awardInfo_add";
-    	}
+	public String addAwardInfo(HttpServletRequest request){
+    	String awardName=request.getParameter("awardName");
+    	String awardGrade=request.getParameter("awardGrade");
+    	int awardNum=Function.getInt(request.getParameter("awardNum"),0);
+    	BigDecimal probability=BigDecimal.valueOf(Double.valueOf(request.getParameter("probability")));
+    	AwardInfo awardInfo=new AwardInfo();
+    	awardInfo.setAwardName(awardName);
+    	awardInfo.setAwardGrade(awardGrade);
+    	awardInfo.setAwardNum(awardNum);
+    	awardInfo.setProbability(probability);
+    	awardInfo.setAddtime(DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr()));
     	int isOk=awardInfoService.insertAwardInfo(awardInfo);
-    	return "awardInfo/awardInfo_list";
+    	return "redirect:/awardInfo/awardInfos";
 	}
     /**
-  	 * 跳转奖品修改界面
-  	 * @param model
-  	 * @return
-  	 */
-  	@RequestMapping(value="/awardInfoedit",method=RequestMethod.GET)
-  	public String editAwardInfo(Model model,int id){
-  		AwardInfo awardInfo=awardInfoService.getAwardInfoByID(id);
-  		model.addAttribute(awardInfo);
-  		return "awardInfo_edit";
+     * 查找一个奖品
+     * @param id
+     * @param response
+     */
+  	@RequestMapping(value="/findAwardInfo",method=RequestMethod.POST)
+  	public void editAwardInfo(int id,HttpServletResponse response){
+  		try {
+  			AwardInfo awardinfo =awardInfoService.getAwardInfoByID(id);
+  	  		String json="{id:'"+awardinfo.getId()+"',awardName:'"+awardinfo.getAwardName()+"',awardGrade:'"+awardinfo.getAwardGrade()+"',awardNum:'"+awardinfo.getAwardNum()+"',probability:'"+awardinfo.getProbability()+"'}";
+  	  	    response.setCharacterEncoding("UTF-8");
+  	  		PrintWriter out=response.getWriter();
+			out.print(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
   	}
   	 /**
-     * 修改奖品信息
+     * 修改奖品
      * @param awardInfo
      * @param br
      * @return
@@ -79,17 +105,17 @@ public class AwardInfoController {
  		return "welcome";
  	}
      /**
-      * 删除奖品信息
+      * 删除奖品
       * @param id
       * @return
       */
-      @RequestMapping(value="/awardInfodel")
+      @RequestMapping(value="/awardInfodel",method=RequestMethod.POST)
   	public String delAwardInfo(int id){
      	 awardInfoService.deleteAwardInfo(id);
-  		return "awardInfo/awardInfo_list";
+  		return "manage/award/award_list";
   	}
       /**
-       * 批量删除奖品信息
+       * 批量删除奖品
        * @param ids
        * @return
        */

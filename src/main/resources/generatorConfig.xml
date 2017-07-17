@@ -36,7 +36,7 @@
     </javaClientGenerator> 
         
     <!-- 用户表 -->  
-    <table schema="t" tableName="award_record" domainObjectName="AwardRecord"  
+    <table schema="t" tableName="award_info" domainObjectName="AwardInfo"  
         enableCountByExample="false"  
         enableUpdateByExample="false"  
         enableDeleteByExample="false"  

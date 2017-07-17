@@ -10,18 +10,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import main.java.dao.QuestionMapper;
 import main.java.entity.Question;
 import main.java.exception.ExcelException;
 import main.java.service.QuestionService;
 import main.java.util.DateUtil;
+import main.java.util.Function;
 import main.java.util.JxlExcelUtil;
 import main.java.util.Page;
 
 
 
-
+@Service
 public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	QuestionMapper questionMapper;
@@ -39,8 +41,8 @@ public class QuestionServiceImpl implements QuestionService {
 		try {
 			InputStream in = new FileInputStream(file);
 			LinkedHashMap<String, String> fieldMap=new LinkedHashMap<String, String>();
-			fieldMap.put("问题描述", "bookName");
-			fieldMap.put("问题类型", "bookKind");
+			fieldMap.put("问题描述", "questionTitle");
+			fieldMap.put("问题类型", "type");
 			String uniqueFields[]={"问题描述"};
 			list=JxlExcelUtil.excelToList(in, "Sheet1", Question.class, fieldMap, uniqueFields);
 			
@@ -52,7 +54,9 @@ public class QuestionServiceImpl implements QuestionService {
 			e.printStackTrace();
 		}
 		for(Question question:list){
+			int id=Function.getUUID();
 			Date addtime=DateUtil.parseDateTime(DateUtil.getCurrentDateTimeStr());//创建时间
+			question.setId(id);
 			question.setAddtime(addtime);
 		}
 		if(list.size()>0){

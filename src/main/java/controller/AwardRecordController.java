@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import main.java.entity.AwardInfo;
 import main.java.entity.AwardRecord;
 import main.java.service.AwardRecordService;
+import main.java.util.Function;
 import main.java.util.Page;
 
 @Controller
@@ -25,7 +27,14 @@ public class AwardRecordController {
 	
 	@Autowired
 	AwardRecordService awardRecordService;
-
+	/**
+	 * 中奖纪录列表
+	 * @param model
+	 * @param awardRecord
+	 * @param page
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/awardRecords")
 	public String listAwardRecord(Model model, @ModelAttribute AwardRecord awardRecord,@ModelAttribute Page page, HttpServletRequest request) {
 		String currentPageStr = request.getParameter("currentPage");
@@ -33,12 +42,20 @@ public class AwardRecordController {
 		if(currentPageStr != null){
 			int currentPage = Integer.parseInt(currentPageStr);
 			page.setCurrentPage(currentPage);
+		}else{
+			currentPageStr="1";
+			int currentPage = Integer.parseInt(currentPageStr);
+			page.setCurrentPage(currentPage);
 		}
 		logger.info(page.toString());
 		logger.info(awardRecord.toString());
 		List<AwardRecord> awardRecords = awardRecordService.listAwardRecord(awardRecord,page);
+		String jsArray[][]={{"0","未领取"},{"1","已领取"}};
+		for(AwardRecord record:awardRecords){
+			record.setState(Function.getTitleJsArray(record.getState(), jsArray));
+		}
 		model.addAttribute("awardRecords",awardRecords);
-		return "question/question_list";
+		return "manage/award/award_record";
 	}
     /**
 	 * 跳转中奖纪录添加界面

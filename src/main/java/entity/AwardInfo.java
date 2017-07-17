@@ -1,5 +1,6 @@
 package main.java.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class AwardInfo {
@@ -11,7 +12,7 @@ public class AwardInfo {
 
     private Integer awardNum;
 
-    private Integer probability;
+    private BigDecimal probability;
 
     private Date addtime;
 
@@ -47,11 +48,11 @@ public class AwardInfo {
         this.awardNum = awardNum;
     }
 
-    public Integer getProbability() {
+    public BigDecimal getProbability() {
         return probability;
     }
 
-    public void setProbability(Integer probability) {
+    public void setProbability(BigDecimal probability) {
         this.probability = probability;
     }
 

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>表单提示验证 - Bootstrap后台管理系统模版Ace下载</title>
+		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="assets/css/select2.css" />
+		<!-- ace styles -->
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/index.css" />
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+		<script src="assets/js/ace-extra.min.js"></script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+			function clickTrim(source){
+		    var id = source.id;
+		    $(".question_info").removeClass("clickTrim");
+		    $("#"+id).find("input").prop("checked","checked");
+		    $("#"+id).addClass("clickTrim");
+		}
+
+		</script>
+	</head>
+
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="#" class="navbar-brand">
+						<small>
+							<i class="icon-flag"></i>
+							答题抽奖活动
+						</small>
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+
+				
+			</div><!-- /.container -->
+		</div>
+
+		<div class="main-container" id="main-container">
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<div class="main-content">
+					
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								总分达到70分可以获得一次抽奖机会
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row-fluid">
+									<div class="span12">
+										<div class="widget-box">
+											<div class="widget-header widget-header-blue widget-header-flat">
+												<h4 class="lighter">题目</h4>
+
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main">
+													<div id="fuelux-wizard" class="row-fluid" data-target="#step-container">
+														<ul class="wizard-steps">
+															<li data-target="#step1" class="active">
+																<span class="step">1</span>
+																<span class="title">第一题</span>
+															</li>
+
+															<li data-target="#step2">
+																<span class="step">2</span>
+																<span class="title">第二题</span>
+															</li>
+
+															<li data-target="#step3">
+																<span class="step">3</span>
+																<span class="title">第三题</span>
+															</li>
+
+															<li data-target="#step4">
+																<span class="step">4</span>
+																<span class="title">第四题</span>
+															</li>
+															<li data-target="#step4">
+																<span class="step">5</span>
+																<span class="title">第五题</span>
+															</li>
+															<li data-target="#step4">
+																<span class="step">6</span>
+																<span class="title">第六题</span>
+															</li>
+															<li data-target="#step4">
+																<span class="step">7</span>
+																<span class="title">第七题</span>
+															</li>
+															<li data-target="#step4">
+																<span class="step">8</span>
+																<span class="title">第八题</span>
+															</li>
+															<li data-target="#step9">
+																<span class="step">9</span>
+																<span class="title">第九题</span>
+															</li>
+															<li data-target="#step10">
+																<span class="step">10</span>
+																<span class="title">第十题</span>
+															</li>
+														</ul>
+													</div>
+
+													<hr />
+													<div class="step-content row-fluid position-relative" id="step-container">
+													<form class="form-horizontal" id="sample-form">
+														<div class="step-pane active" id="step1">
+															<div class="left">
+																<h3 class="green">中华人民共和国成立的年份是哪一年？</h3>
+																<ul class="list-unstyled question" id="question7" name="">
+																    <li class="question_info" onclick="clickTrim(this)" id="item0"><input type="radio" name="item" value="A">&nbsp;A.1949年</li>
+																    <li class="question_info" onclick="clickTrim(this)" id="item1"><input type="radio" name="item" value="B">&nbsp;B.1945年</li>
+																    <li class="question_info" onclick="clickTrim(this)" id="item2"><input type="radio" name="item" value="C">&nbsp;C.1948年</li>
+																    <li class="question_info" onclick="clickTrim(this)" id="item3"><input type="radio" name="item" value="D">&nbsp;D.1951年</li>
+																</ul>
+															</div>
+														</div>
+
+														<div class="step-pane" id="step2">
+															<div class="center">
+																<h3 class="green">中华人民共和国成立的年份是哪一年？</h3>
+															</div>
+															<div class="">
+                												<input name="need_inv" type="checkbox" style="height:20px;width:20px;" class="radioclass input" value="1">1949
+              												</div>
+														</div>
+														<div class="step-pane" id="step3">
+															<div class="center">
+																<h3 class="green">第三题？</h3>
+															</div>
+															<div class="">
+                												<input name="need_inv" type="checkbox" style="height:20px;width:20px;" class="radioclass input" value="1">1949
+              												</div>
+														</div>
+
+														<div class="step-pane" id="step4">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第四题
+															</div>
+														</div>
+														<div class="step-pane" id="step5">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第五题
+															</div>
+														</div>
+														<div class="step-pane" id="step6">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第六题
+															</div>
+														</div>
+														<div class="step-pane" id="step7">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第七题
+															</div>
+														</div>
+														<div class="step-pane" id="step8">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第八题
+															</div>
+														</div>
+														<div class="step-pane" id="step9">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第九题
+															</div>
+														</div>
+														<div class="step-pane" id="step10">
+															<div class="center">
+																<h3 class="green">Congrats!</h3>
+																第十题
+															</div>
+														</div>
+														</form>
+													</div>
+
+													<hr />
+													<div class="row-fluid wizard-actions">
+														<button class="btn btn-success" id="submit">
+															提交试卷
+														</button>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<button class="btn btn-prev">
+															<i class="icon-arrow-left"></i>
+															Prev
+														</button>
+
+														<button class="btn btn-success btn-next" data-last="Finish ">
+															Next
+															<i class="icon-arrow-right icon-on-right"></i>
+														</button>
+													</div>
+												</div><!-- /widget-main -->
+											</div><!-- /widget-body -->
+										</div>
+									</div>
+								</div>
+
+								
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<script src="assets/js/fuelux/fuelux.wizard.min.js"></script>
+		<script src="assets/js/jquery.validate.min.js"></script>
+		<script src="assets/js/additional-methods.min.js"></script>
+		<script src="assets/js/bootbox.min.js"></script>
+		<script src="assets/js/jquery.maskedinput.min.js"></script>
+		<script src="assets/js/select2.min.js"></script>
+
+		<!-- ace scripts -->
+
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			jQuery(function($) {
+			
+				$('[data-rel=tooltip]').tooltip();
+			
+				$(".select2").css('width','200px').select2({allowClear:true})
+				.on('change', function(){
+					$(this).closest('form').validate().element($(this));
+				}); 
+			
+			
+				var $validation = false;
+				$('#fuelux-wizard').ace_wizard().on('change' , function(e, info){
+					if(info.step == 1 && $validation) {
+						if(!$('#validation-form').valid()) return false;
+					}
+				}).on('finished', function(e) {
+					bootbox.dialog({
+						message: "你的题目已经作答完毕，点击提交按钮可以提交答案。", 
+						buttons: {
+							"success" : {
+								"label" : "OK",
+								"className" : "btn-sm btn-primary"
+							}
+						}
+					});
+				}).on('stepclick', function(e){
+					//return false;//prevent clicking on steps
+				});
+			
+			
+				$('#skip-validation').removeAttr('checked').on('click', function(){
+					$validation = this.checked;
+					if(this.checked) {
+						$('#sample-form').hide();
+						$('#validation-form').removeClass('hide');
+					}
+					else {
+						$('#validation-form').addClass('hide');
+						$('#sample-form').show();
+					}
+				});
+									
+				//documentation : http://docs.jquery.com/Plugins/Validation/validate	
+				$('#modal-wizard .modal-header').ace_wizard();
+				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+
+				$('#submit').click(function(){
+					bootbox.confirm("确认提交？",function(res){
+					if(res){
+						bootbox.alert("sss");
+					}	
+					
+					})
+				});
+			})
+		</script>
+</body>
+</html>

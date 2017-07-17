@@ -119,14 +119,14 @@
   <select id="countQuestion" resultType="int" parameterType="main.java.entity.Question">
   	select count(*) from question
   	<where>
-  		<if test="question.questionTitle != null and !&quot;&quot;.equals(question.questionTitle.trim())">
-  			and question_title = #{question.questionTitle}
+  		<if test="questionTitle != null and !&quot;&quot;.equals(questionTitle.trim())">
+  			and question_title = #{questionTitle}
   		</if>
-  		<if test="question.type != null and !&quot;&quot;.equals(question.type.trim())">
-  			and type = #{question.type}
+  		<if test="type != null and !&quot;&quot;.equals(type.trim())">
+  			and type = #{type}
   		</if>
-  		<if test="question.addtime != null and !&quot;&quot;.equals(question.addtime.trim())">
-  			and addtime = #{question.addtime}
+  		<if test="addtime != null and !&quot;&quot;.equals(addtime.trim())">
+  			and addtime = #{addtime}
   		</if>
   	</where>
   </select>
@@ -138,10 +138,11 @@
   </select>
   
   <insert id="insertQuestionBatch" parameterType="java.util.List">
-		  insert into question (question_title,type,addtime)
+		  insert into question (id,question_title,type,addtime)
 		        values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.questionTitle,jdbcType=VARCHAR},
+            (#{item.id,jdbcType=INTEGER},
+             #{item.questionTitle,jdbcType=VARCHAR},
              #{item.type,jdbcType=VARCHAR},
              #{item.addtime,jdbcType=TIMESTAMP}
              )

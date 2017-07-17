@@ -94,18 +94,18 @@
   <select id="selectByQuestionId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select
   	<include refid="Base_Column_List" />
-  	from question
+  	from question_answer
   	<where>
-  		<if test="questionanswer.questionid != null and !&quot;&quot;.equals(questionanswer.questionid.trim())">
-  			and questionid = #{questionanswer.questionid}
+  		<if test="questionid != null">
+  			and questionid = #{questionid}
   		</if>
   	</where>
   </select>
-  <insert id="insertBookBatch" parameterType="java.util.List">
+  <insert id="insertQuestionAnswerBatch" parameterType="java.util.List">
 		  insert into question_answer (questionid,answerdetail,isright,addtime)
 		        values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.questionid,jdbcType=VARCHAR},
+            (#{item.questionid,jdbcType=INTEGER},
              #{item.answerdetail,jdbcType=VARCHAR},
              #{item.isright,jdbcType=VARCHAR},
              #{item.addtime,jdbcType=TIMESTAMP}

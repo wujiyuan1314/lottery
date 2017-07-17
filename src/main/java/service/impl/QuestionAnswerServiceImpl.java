@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import main.java.dao.QuestionAnswerMapper;
 import main.java.entity.QuestionAnswer;
 import main.java.exception.ExcelException;
@@ -18,8 +21,9 @@ import main.java.util.JxlExcelUtil;
 
 
 
-
+@Service
 public class QuestionAnswerServiceImpl implements QuestionAnswerService {
+	@Autowired
 	QuestionAnswerMapper questionanswerMapper;
 
 	@Override

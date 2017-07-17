@@ -6,7 +6,7 @@
     <result column="award_name" property="awardName" jdbcType="VARCHAR" />
     <result column="award_grade" property="awardGrade" jdbcType="VARCHAR" />
     <result column="award_num" property="awardNum" jdbcType="INTEGER" />
-    <result column="probability" property="probability" jdbcType="INTEGER" />
+    <result column="probability" property="probability" jdbcType="DECIMAL" />
     <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -27,7 +27,7 @@
       award_num, probability, addtime
       )
     values (#{id,jdbcType=INTEGER}, #{awardName,jdbcType=VARCHAR}, #{awardGrade,jdbcType=VARCHAR}, 
-      #{awardNum,jdbcType=INTEGER}, #{probability,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
+      #{awardNum,jdbcType=INTEGER}, #{probability,jdbcType=DECIMAL}, #{addtime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="main.java.entity.AwardInfo" >
@@ -66,7 +66,7 @@
         #{awardNum,jdbcType=INTEGER},
       </if>
       <if test="probability != null" >
-        #{probability,jdbcType=INTEGER},
+        #{probability,jdbcType=DECIMAL},
       </if>
       <if test="addtime != null" >
         #{addtime,jdbcType=TIMESTAMP},
@@ -86,7 +86,7 @@
         award_num = #{awardNum,jdbcType=INTEGER},
       </if>
       <if test="probability != null" >
-        probability = #{probability,jdbcType=INTEGER},
+        probability = #{probability,jdbcType=DECIMAL},
       </if>
       <if test="addtime != null" >
         addtime = #{addtime,jdbcType=TIMESTAMP},
@@ -99,11 +99,11 @@
     set award_name = #{awardName,jdbcType=VARCHAR},
       award_grade = #{awardGrade,jdbcType=VARCHAR},
       award_num = #{awardNum,jdbcType=INTEGER},
-      probability = #{probability,jdbcType=INTEGER},
+      probability = #{probability,jdbcType=DECIMAL},
       addtime = #{addtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <!-- 一下为自定义方法 -->
+ <!-- 一下为自定义方法 -->
   <select id="listAwardInfo" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
@@ -127,17 +127,17 @@
   <select id="countAwardInfo" resultType="int" parameterType="main.java.entity.AwardInfo">
   	select count(*) from award_info
   	<where>
-  		<if test="awardInfo.awardName != null and !&quot;&quot;.equals(awardInfo.awardName.trim())">
-  			and award_name = #{awardInfo.awardName}
+  		<if test="awardName != null and !&quot;&quot;.equals(awardName.trim())">
+  			and award_name = #{awardName}
   		</if>
-  		<if test="awardInfo.awardGrade != null and !&quot;&quot;.equals(awardInfo.awardGrade.trim())">
-  			and award_grade = #{awardInfo.awardGrade}
+  		<if test="awardGrade != null and !&quot;&quot;.equals(awardGrade.trim())">
+  			and award_grade = #{awardGrade}
   		</if>
-  		<if test="awardInfo.awardNum != null and !&quot;&quot;.equals(awardInfo.awardNum.trim())">
-  			and award_num = #{awardInfo.awardNum}
+  		<if test="awardNum != null and !&quot;&quot;.equals(awardNum.trim())">
+  			and award_num = #{awardNum}
   		</if>
-  		<if test="awardInfo.probability != null and !&quot;&quot;.equals(awardInfo.probability.trim())">
-  			and probability = #{awardInfo.probability}
+  		<if test="probability != null and !&quot;&quot;.equals(probability.trim())">
+  			and probability = #{probability}
   		</if>
   	</where>
   </select>

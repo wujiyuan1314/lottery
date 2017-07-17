@@ -105,21 +105,21 @@
   		<if test="awardRecord.state != null and !&quot;&quot;.equals(awardRecord.state.trim())">
   			and state = #{awardRecord.state}
   		</if>
-  	</where>
+  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
   </select>
   
   <select id="countAwardRecord" resultType="int" parameterType="main.java.entity.AwardRecord">
   	select count(*) from award_record
   	<where>
-  		<if test="awardRecord.mobile != null and !&quot;&quot;.equals(awardRecord.mobile.trim())">
-  			and mobile = #{awardRecord.mobile}
+  		<if test="mobile != null and !&quot;&quot;.equals(mobile.trim())">
+  			and mobile = #{mobile}
   		</if>
-  		<if test="awardRecord.awareid != null and !&quot;&quot;.equals(awardRecord.awareid.trim())">
-  			and awareid = #{awardRecord.awareid}
+  		<if test="awareid != null and !&quot;&quot;.equals(awareid.trim())">
+  			and awareid = #{awareid}
   		</if>
-  		<if test="awardRecord.state != null and !&quot;&quot;.equals(awardRecord.state.trim())">
-  			and state = #{awardRecord.state}
+  		<if test="state != null and !&quot;&quot;.equals(state.trim())">
+  			and state = #{state}
   		</if>
-  	</where>order by id limit #{page.dbIndex},#{page.dbNumber}
+  	</where>
   </select>
 </mapper>

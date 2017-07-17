@@ -12,8 +12,7 @@
 	<!--配置spring mvc -->
 
 	<!--0.扫描controller包 -->
-	<context:component-scan base-package="controller" />
-
+	<context:component-scan base-package="main/java/controller" />
 	<!--1.开启springmvc注解模式 a.自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
 		b.默认提供一系列的功能:数据绑定，数字和日期的format@NumberFormat,@DateTimeFormat c:xml,json的默认读写支持 -->
 	<mvc:annotation-driven />
@@ -27,7 +26,7 @@
 	<!--3.视图模式配置，定义跳转文件的前缀和后缀 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
